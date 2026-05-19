@@ -1,0 +1,12 @@
+# LangChain core
+langchain>=0.3.0
+langchain-core>=0.3.0
+
+# Google Gemini integration
+langchain-google-genai>=2.0.0
+
+# Google AI Python SDK (required by langchain-google-genai)
+google-generativeai>=0.8.0
+
+# Environment variable management
+python-dotenv>=1.0.0
