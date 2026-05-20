@@ -1,19 +1,16 @@
 from dotenv import load_dotenv
-from langchain.agents import create_agent
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage,SystemMessage
 
 load_dotenv()
 
-def get_weather(city: str) -> str:
-    """Get weather for a given city."""
-    return f"It's always sunny in {city}!"
+model = ChatOpenAI(model="gpt-4",temperature=0.1)
 
-agent = create_agent(
-    model="openai:gpt-5.4",
-    tools=[get_weather],
-    system_prompt="You are a helpful assistant",
-)
+messages = [
+    SystemMessage(content="You are translator expert Turkish to English and English to Turkish, Translate the user input"),
+    HumanMessage(content="Hello, How are you?"),
+]
 
-result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What's the weather in San Francisco?"}]}
-)
-print(result["messages"][-1].content_blocks)
+if __name__ == "__main__":
+    response = model.invoke(messages)
+    print(response)
